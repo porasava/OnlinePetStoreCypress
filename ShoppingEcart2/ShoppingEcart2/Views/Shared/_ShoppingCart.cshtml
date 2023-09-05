@@ -1,0 +1,78 @@
+﻿@using ShoppingEcart2.ViewModel
+<ul class="nav navbar-nav navbar-right">
+    <li>
+        @if (Session["userID"] != null)
+        {
+            if (Session["CartCounter"] == null)
+            {
+        @Html.ActionLink("Cart", "ShoppingCart", "Shopping", new { id = "cartItem" }) 
+               using (Html.BeginForm("LogOut", "User", FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <a href="javascript:document.getElementById('logoutForm').submit()">
+                        Log Out
+                    </a>
+
+                }
+            }
+            else
+            {
+                @Html.ActionLink("Cart(" + Session["CartCounter"] + ")", "ShoppingCart", "Shopping", new { id = "cartItem" })
+                using (Html.BeginForm("LogOut", "User", FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <a href="javascript:document.getElementById('logoutForm').submit()">
+                        Log Out
+                    </a>
+
+                }
+            }
+        }
+        else
+        {
+            <a id="loginlink" href="@Url.Action("CustomerLogin", "User")">Customer Login</a>
+        }
+
+    </li>
+</ul>
+
+@*<ul class="nav navbar-nav navbar-right">
+    <li>*@
+
+            @*@if (Session["cart"] != null)
+            {
+                foreach (ShoppingCartModel Item in (List<ShoppingCartModel>)Session["cart"])
+                {
+            <li>*@
+                @*<a href="#">  @Item.ItemDB.ItemName (@Item.Quantity) <i class="fa fa-times"></i></a>
+                <a href="#">  Cart (@Item.Quantity) <i class="fa fa-times"></i></a>
+            </li>
+                }*@
+            }
+            @*<li class="divider"></li>
+            <li><a href="@Url.Action("ShoppingCart","Shopping")">Checkout</a></li>    
+        </ul>
+    </li>
+</ul*@>
+
+@*<ul class="nav navbar-nav navbar-right">
+    <li class="dropdown">
+        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Your Cart  <i class="fa fa-shopping-cart"></i><b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            @if (Session["cart"] != null)
+            {
+                foreach (ShoppingCartModel Item in (List<ShoppingCartModel>)Session["cart"])
+                {
+                    <li>*@
+                        @*<a href="#">  @Item.ItemDB.ItemName (@Item.Quantity) <i class="fa fa-times"></i></a>*@
+                        @*<a href="#">  @Item.ItemName (@Item.Quantity) <i class="fa fa-times"></i></a>*@
+                    @*</li>
+                }
+            }
+            <li class="divider"></li>
+            <li><a href="@Url.Action("ShoppingCart","Shopping")">Checkout</a></li>
+        </ul>
+    </li>
+</ul>*@

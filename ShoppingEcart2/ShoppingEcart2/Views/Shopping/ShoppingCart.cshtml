@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ShoppingEcart2.ViewModel.ShoppingCartModel>
+@using ShoppingEcart2.ViewModel
+@{
+    ViewBag.Title = "ShoppingCart";
+    decimal TotalAmount = 0.00M;
+}
+
+<h2>Shopping Cart</h2>
+@if (Session["CartItem"] == null)
+{
+    <div class="alert alert-danger">
+        <strong>No product added to cart!</strong>
+    </div>
+
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th style="text-align: center">Product</th>
+                <th style="text-align: center">Product Name</th>
+                <th style="text-align: center">Quantity</th>
+                <th style="text-align: center">Price</th>
+                <th style="text-align: center">Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ShoppingCartModel item in (List<ShoppingCartModel>)Session["CartItem"])
+            {
+                TotalAmount += item.Total;
+                <tr>
+                    <td style="text-align: center"><img src="@Url.Content(item.ImagePath)" height="50px" width="50px" class="img-rounded" /></td>
+                    <td style="text-align: center">@item.ItemName</td>
+                    <td style="text-align: center">@item.Quantity</td>
+                    <td style="text-align: center">@item.UnitPrice.ToString("#,##0.00 NZD")</td>
+                    <td style="text-align: center">@item.Total.ToString("#,##0.00 NZD")</td>
+                </tr>
+            }
+            @*<tr style="border-top: 2px solid maroon">*@
+            <tr>
+                <td colspan="4">
+                    <h3>Total Amount</h3>
+
+                </td>
+                <td style="text-align: center"><h3>@TotalAmount.ToString("#,##0.00 NZD")</h3></td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-success" href="@Url.Action("Index", "Shopping")">Back to Shopping</a>
+
+}
+
+
+
+
+@*<table class="table-condensed" style="width: 100%">
+    @foreach (var item in Model)
+    {
+        TotalAmount += item.Total;
+        <tr>
+<td><img src="@Url.Content(item.ImagePath)" height="50px" width="50px" class="img-rounded" /></td>
+    <td style="text-align: right">@item.ItemName</td>
+    <td style="text-align: right">@item.Quantity.ToString("#,##0")</td>
+    <td style="text-align: right">@item.UnitPrice.ToString("#,##0.00 NZD")</td>
+    <td style="text-align: right">@item.Total.ToString("#,##0.00 NZD")</td>
+        </tr>
+    }*@
+
+@*<tr style="border-top: 2px solid maroon">
+        <td colspan="4" style="text-align: right">
+            <h3>Total Amount</h3>
+        </td>
+        <td style="text-align: right"><h3>@TotalAmount.ToString("#,##0.00 NZD")</h3></td>
+    </tr>
+    <tr>
+<td style="text-align: right">
+                    <input type="button" value="Save" name="Save" class="btn btn-primary" />
+                </td>
+            </tr>
+        <tr>
+            <td colspan="5">
+                @Html.ActionLink("Back to Shopping", "Index", "Shopping")
+            </td>
+        </tr>
+    </table>
+
+    }*@

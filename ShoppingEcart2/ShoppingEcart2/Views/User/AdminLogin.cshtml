@@ -1,0 +1,62 @@
+﻿@model ShoppingEcart2.Models.AdminUser
+@{
+    ViewBag.Title = "AdminLogin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="weight=device-width" />
+    <h2>Admin Login</h2>
+</head>
+<body>
+    <div class="form-horizontal">
+        <div id="login-div">
+            @using (Html.BeginForm("Autherizee", "User", FormMethod.Post))
+            {
+                <table>
+                    <tr>
+                        <td></td>
+                        <td style="text-decoration:underline"></td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(model => model.AdminUsername)</td>
+                        <td>@Html.EditorFor(Model => Model.AdminUsername)</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td></td>
+                        <td>@Html.ValidationMessageFor(model => model.AdminUsername)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(model => model.AdminPassword)</td>
+                        <td>@Html.EditorFor(model => model.AdminPassword)</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>@Html.ValidationMessageFor(model => model.AdminPassword)</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label class="field-validation-error">@Html.DisplayFor(model => model.AdminLoginErrorMessage)</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" name="name" value="Login" />
+                            <input type="reset" name="name" value="Clear" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><a id="loginlink" href="@Url.Action("AdminRegister", "User")">Admin Register</a></td>
+                    </tr>
+                </table>
+            }
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>

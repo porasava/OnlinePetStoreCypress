@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ShoppingEcart2.Models.CustomerUser>
+
+@{
+    ViewBag.Title = "CustomerList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    if (Session["AdminUserID"] == null)
+    { Response.Redirect("~/User/AdminLogin"); }
+}
+
+<h2>Customer List</h2>
+
+<p>
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+
+        <th>Action</th>
+    </tr>
+
+@foreach (var CustomerUser in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => CustomerUser.CustomerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => CustomerUser.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => CustomerUser.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => CustomerUser.UserName)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => CustomerUser.Email)
+        </td>
+
+        <td>
+            @Html.ActionLink("Delete", "DeleteCustomer", new { id = CustomerUser.CustomerId })
+        </td>
+    </tr>
+}
+
+</table>
